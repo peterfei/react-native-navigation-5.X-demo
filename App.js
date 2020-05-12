@@ -7,6 +7,7 @@ import IconFont from './src/iconfont';
 import HomeScreen from './src/pages/Home/HomeScreen';
 import DetailsScreen from './src/pages/Home/Details';
 import SettingsScreen from './src/pages/Settings/SettingsScreen';
+import theme from './Theme';
 const HomeStack = createStackNavigator();
 
 function HomeStackScreen() {

@@ -1,12 +1,6 @@
 import React, {PureComponent} from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity,
-    Image,
-    Button,
-} from 'react-native';
+
+import {View, Text, Card, Button} from 'react-native-ui-lib';
 
 class Home extends PureComponent {
     constructor(props) {
@@ -14,10 +8,11 @@ class Home extends PureComponent {
     }
     render() {
         return (
-            <View style={styles.container}>
-                <Text>Home screen</Text>
+            <View flex  center>
+                <Text darkText h2>Home screen</Text>
                 <Button
-                    title="Go to Details"
+                    size="xSmall"
+                    label="Go to Details"
                     onPress={() => this.props.navigation.navigate('Details')}
                 />
             </View>
@@ -25,11 +20,4 @@ class Home extends PureComponent {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
 export default Home;
