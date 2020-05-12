@@ -22,13 +22,12 @@ class Home extends PureComponent {
         };
         this.refreshScreen = this.refreshScreen.bind(this);
     }
-    componentDidMount() {
-    }
+    componentDidMount() {}
     refreshScreen() {
         NetInfo.fetch().then(state => {
             console.log('Connection type', state.type);
             console.log('Is connected?', state.isConnected);
-            this.setState({isConnected:state.isConnected})
+            this.setState({isConnected: state.isConnected});
         });
         this.setState({lastRefresh: Date(Date.now()).toString()});
     }
@@ -73,4 +72,5 @@ const styles = StyleSheet.create({
     },
 });
 
+export default Home;
 export default Home;
