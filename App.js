@@ -4,39 +4,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IconFont from './src/iconfont';
-
-function DetailsScreen() {
-    return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Details!</Text>
-        </View>
-    );
-}
-
-function HomeScreen({navigation}) {
-    return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Home screen</Text>
-            <Button
-                title="Go to Details"
-                onPress={() => navigation.navigate('Details')}
-            />
-        </View>
-    );
-}
-
-function SettingsScreen({navigation}) {
-    return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Settings screen</Text>
-            <Button
-                title="Go to Details"
-                onPress={() => navigation.navigate('Details')}
-            />
-        </View>
-    );
-}
-
+import HomeScreen from './src/pages/Home/HomeScreen';
+import DetailsScreen from './src/pages/Home/Details';
+import SettingsScreen from './src/pages/Settings/SettingsScreen';
 const HomeStack = createStackNavigator();
 
 function HomeStackScreen() {
@@ -70,9 +40,7 @@ export default function App() {
                         let iconName;
 
                         if (route.name === 'Home') {
-                            iconName = focused
-                                ? 'yulan'
-                                : 'yulan';
+                            iconName = focused ? 'yulan' : 'yulan';
                         } else if (route.name === 'Settings') {
                             iconName = focused ? 'ziyuan' : 'ziyuan1';
                         }
