@@ -42,7 +42,7 @@ export default function App() {
                         if (route.name === 'Home') {
                             iconName = focused ? 'yulan' : 'yulan';
                         } else if (route.name === 'Settings') {
-                            iconName = focused ? 'ziyuan' : 'ziyuan1';
+                            iconName = focused ? 'ziyuan' : 'ziyuan';
                         }
 
                         // You can return any component that you like here!
