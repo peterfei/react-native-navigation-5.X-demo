@@ -1,29 +1,24 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {View, Text, TouchableOpacity} from 'react-native-ui-lib';
 
-import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity,
-    Image,
-    Button,
-} from 'react-native';
+export default class KeyboardView extends Component {
+  static propTypes = {
+    title: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    onPress: PropTypes.func
+  };
 
-class Details extends PureComponent {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>Details!</Text>
-            </View>
-        );
-    }
+  render() {
+    const {title, backgroundColor, onPress} = this.props;
+
+    return (
+      <View flex center style={backgroundColor && {backgroundColor}}>
+        <Text white>{title}</Text>
+        <TouchableOpacity testID={'click-me'} padding-20 marginT-30 bg-white onPress={onPress}>
+          <Text>Click Me!</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
-export default Details;
