@@ -27,7 +27,8 @@
     "react-native-screens": "^2.7.0",
     "react-native-simple-store": "^2.0.2",
     "react-native-svg": "^12.1.0",
-    "react-native-ui-lib": "^5.7.2"
+    "react-native-ui-lib": "^5.7.2",
+    "rn-placeholder": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
