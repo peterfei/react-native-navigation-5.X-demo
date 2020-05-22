@@ -6,29 +6,29 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IconFont from './src/iconfont';
 import HomeScreen from './src/pages/Home/HomeScreen';
 import DetailsScreen from './src/pages/Home/Details';
+import FindScreen from './src/pages/Find/findScreen';
 import SettingsScreen from './src/pages/Settings/SettingsScreen';
 import theme from './Theme';
+
 const HomeStack = createStackNavigator();
 
 function HomeStackScreen() {
     return (
         <HomeStack.Navigator>
-            <HomeStack.Screen
-                name="课程"
-                component={HomeScreen}
-                //options={{
-                //    headerRight: () => (
-                //        <Button
-                //            onPress={() => alert('This is a button!')}
-                //            title="Info"
-                //            color="#000"
-                //        />
-                //    ),
-                //}}
-            />
-            <HomeStack.Screen name="Details" component={DetailsScreen} />
+            <HomeStack.Screen name="Home" component={HomeScreen}/>
+            <HomeStack.Screen name="Details" component={DetailsScreen}/>
         </HomeStack.Navigator>
     );
+}
+
+const FindStack = createStackNavigator();
+
+function FindStackSereen() {
+    return (
+        <FindStack.Navigator>
+            <FindStack.Screen name="Find" component={FindScreen}/>
+        </FindStack.Navigator>
+    )
 }
 
 const SettingsStack = createStackNavigator();
@@ -36,8 +36,8 @@ const SettingsStack = createStackNavigator();
 function SettingsStackScreen() {
     return (
         <SettingsStack.Navigator>
-            <SettingsStack.Screen name="Settings" component={SettingsScreen} />
-            <SettingsStack.Screen name="Details" component={DetailsScreen} />
+            <SettingsStack.Screen name="Settings" component={SettingsScreen}/>
+            <SettingsStack.Screen name="Details" component={DetailsScreen}/>
         </SettingsStack.Navigator>
     );
 }
@@ -54,6 +54,8 @@ export default function App() {
 
                         if (route.name === 'Home') {
                             iconName = focused ? 'yulan' : 'yulan';
+                        } else if (route.name === 'Find'){
+                            iconName = focused ? 'fenlei' : 'fenlei';
                         } else if (route.name === 'Settings') {
                             iconName = focused ? 'ziyuan' : 'ziyuan';
                         }
@@ -72,8 +74,9 @@ export default function App() {
                     activeTintColor: 'tomato',
                     inactiveTintColor: 'gray',
                 }}>
-                <Tab.Screen name="Home" component={HomeStackScreen} />
-                <Tab.Screen name="Settings" component={SettingsStackScreen} />
+                <Tab.Screen name="课程" component={HomeStackScreen}/>
+                <Tab.Screen name="云课" component={FindStackSereen}/>
+                <Tab.Screen name="我的" component={SettingsStackScreen}/>
             </Tab.Navigator>
         </NavigationContainer>
     );
