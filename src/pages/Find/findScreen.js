@@ -13,7 +13,7 @@ import {
 ConnectionStatusBar.registerGlobalOnConnectionLost(() => {
     // console.warn('what what?!? connection has been lost');
 });
-class Home extends PureComponent {
+class Find extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Home;
+export default Find;
