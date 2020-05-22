@@ -22,7 +22,13 @@ class Home extends PureComponent {
         };
         this.refreshScreen = this.refreshScreen.bind(this);
     }
-    componentDidMount() {}
+    componentDidMount() {
+        this.props.navigation.setOptions({
+            headerRight: () => (
+                <Button size="xSmall"  onPress={() => alert(111)} label="操作" />
+            ),
+        });
+    }
     refreshScreen() {
         NetInfo.fetch().then(state => {
             console.log('Connection type', state.type);

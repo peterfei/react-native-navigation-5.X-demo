@@ -13,7 +13,19 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
     return (
         <HomeStack.Navigator>
-            <HomeStack.Screen name="Home" component={HomeScreen} />
+            <HomeStack.Screen
+                name="课程"
+                component={HomeScreen}
+                //options={{
+                //    headerRight: () => (
+                //        <Button
+                //            onPress={() => alert('This is a button!')}
+                //            title="Info"
+                //            color="#000"
+                //        />
+                //    ),
+                //}}
+            />
             <HomeStack.Screen name="Details" component={DetailsScreen} />
         </HomeStack.Navigator>
     );
