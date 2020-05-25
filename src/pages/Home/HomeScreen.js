@@ -11,6 +11,7 @@ import {
     Colors,
 } from 'react-native-ui-lib';
 import ListParagraph from '../../compoments/ListParagraph';
+import IconFont from '../../iconfont';
 ConnectionStatusBar.registerGlobalOnConnectionLost(() => {
     // console.warn('what what?!? connection has been lost');
 });
@@ -37,7 +38,7 @@ class Home extends PureComponent {
     componentDidMount() {
         this.props.navigation.setOptions({
             headerRight: () => (
-                <Button size="xSmall" onPress={() => alert(111)} label="操作" />
+                <IconFont  name="tianjia" size={40} color={['green', 'orange']}/>
             ),
         });
         setTimeout(

@@ -52,11 +52,11 @@ export default function App() {
                     tabBarIcon: ({focused, color, size}) => {
                         let iconName;
 
-                        if (route.name === 'Home') {
-                            iconName = focused ? 'yulan' : 'yulan';
-                        } else if (route.name === 'Find'){
+                        if (route.name === '课程') {
+                            iconName = focused ? 'shouye-hou' : 'shouye-hou';
+                        } else if (route.name === '云课'){
                             iconName = focused ? 'fenlei' : 'fenlei';
-                        } else if (route.name === 'Settings') {
+                        } else if (route.name === '我的') {
                             iconName = focused ? 'ziyuan' : 'ziyuan';
                         }
 
