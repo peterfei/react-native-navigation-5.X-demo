@@ -13,75 +13,53 @@ import FindScreen from './src/pages/Find/findScreen';
 import SettingsScreen from './src/pages/Settings/SettingsScreen';
 import theme from './Theme';
 
-const HomeStack = createStackNavigator();
-
-function HomeStackScreen() {
-    return (
-        <HomeStack.Navigator>
-            <HomeStack.Screen name="Home" component={HomeScreen}/>
-            <HomeStack.Screen name="Details" component={DetailsScreen}/>
-            <HomeStack.Screen name="Login" component={LoginIndex}/>
-        </HomeStack.Navigator>
-    );
-}
-
-const FindStack = createStackNavigator();
-
-function FindStackSereen() {
-    return (
-        <FindStack.Navigator>
-            <FindStack.Screen name="Find" component={FindScreen}/>
-        </FindStack.Navigator>
-    )
-}
-
-const SettingsStack = createStackNavigator();
-
-function SettingsStackScreen() {
-    return (
-        <SettingsStack.Navigator>
-            <SettingsStack.Screen name="Settings" component={SettingsScreen}/>
-            <SettingsStack.Screen name="Details" component={DetailsScreen}/>
-        </SettingsStack.Navigator>
-    );
-}
-
 const Tab = createBottomTabNavigator();
+function HomeTabs() {
+    return (
+
+        <Tab.Navigator
+            screenOptions={({route}) => ({
+                tabBarIcon: ({focused, color, size}) => {
+                    let iconName;
+
+                    if (route.name === '课程') {
+                        iconName = focused ? 'shouye-hou' : 'shouye-hou';
+                    } else if (route.name === '云课') {
+                        iconName = focused ? 'fenlei' : 'fenlei';
+                    } else if (route.name === '我的') {
+                        iconName = focused ? 'ziyuan' : 'ziyuan';
+                    }
+
+                    // You can return any component that you like here!
+                    return (
+                        <IconFont name={iconName} size={size} color={color} />
+                    );
+                },
+            })}
+            tabBarOptions={{
+                activeTintColor: 'tomato',
+                inactiveTintColor: 'gray',
+            }}>
+            <Tab.Screen name="课程" component={HomeScreen} />
+            <Tab.Screen name="云课" component={FindScreen} />
+            <Tab.Screen name="我的" component={SettingsScreen} />
+        </Tab.Navigator>
+    );
+}
+
+
+
+const RootStack = createStackNavigator();
 
 export default function App() {
     return (
         <NavigationContainer>
-            <Tab.Navigator
-                screenOptions={({route}) => ({
-                    tabBarIcon: ({focused, color, size}) => {
-                        let iconName;
-
-                        if (route.name === '课程') {
-                            iconName = focused ? 'shouye-hou' : 'shouye-hou';
-                        } else if (route.name === '云课'){
-                            iconName = focused ? 'fenlei' : 'fenlei';
-                        } else if (route.name === '我的') {
-                            iconName = focused ? 'ziyuan' : 'ziyuan';
-                        }
-
-                        // You can return any component that you like here!
-                        return (
-                            <IconFont
-                                name={iconName}
-                                size={size}
-                                color={color}
-                            />
-                        );
-                    },
-                })}
-                tabBarOptions={{
-                    activeTintColor: 'tomato',
-                    inactiveTintColor: 'gray',
-                }}>
-                <Tab.Screen name="课程" component={HomeStackScreen}/>
-                <Tab.Screen name="云课" component={FindStackSereen}/>
-                <Tab.Screen name="我的" component={SettingsStackScreen}/>
-            </Tab.Navigator>
+            <RootStack.Navigator>
+                <RootStack.Screen name="Home" component={HomeTabs} />
+                <RootStack.Screen name="Details" component={DetailsScreen} />
+                <RootStack.Screen name="Settings" component={SettingsScreen} />
+                <RootStack.Screen name="Login" component={LoginIndex} />
+            </RootStack.Navigator>
         </NavigationContainer>
     );
 }
