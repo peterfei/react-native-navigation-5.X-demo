@@ -102,14 +102,6 @@ class Home extends PureComponent {
                             onPress: () => this.pickOption('option 1'),
                         },
                         {
-                            label: 'option 2',
-                            onPress: () => this.pickOption('option 2'),
-                        },
-                        {
-                            label: 'option 3',
-                            onPress: () => this.pickOption('option 3'),
-                        },
-                        {
                             label: 'cancel',
                             onPress: () => this.pickOption('cancel'),
                         },
