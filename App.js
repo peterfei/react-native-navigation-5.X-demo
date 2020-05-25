@@ -4,6 +4,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IconFont from './src/iconfont';
+
+import LoginIndex from "./src/pages/Login/loginIndex";
+
 import HomeScreen from './src/pages/Home/HomeScreen';
 import DetailsScreen from './src/pages/Home/Details';
 import FindScreen from './src/pages/Find/findScreen';
@@ -17,6 +20,7 @@ function HomeStackScreen() {
         <HomeStack.Navigator>
             <HomeStack.Screen name="Home" component={HomeScreen}/>
             <HomeStack.Screen name="Details" component={DetailsScreen}/>
+            <HomeStack.Screen name="Login" component={LoginIndex}/>
         </HomeStack.Navigator>
     );
 }
