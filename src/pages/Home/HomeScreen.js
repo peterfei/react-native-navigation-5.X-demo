@@ -25,6 +25,7 @@ const listItems = [
     {id: '4', text: 'Item'},
     {id: '5', text: 'Item'},
     {id: '6', text: 'Item'},
+    {id: '7', text: 'Item'},
 ];
 class Home extends PureComponent {
     keyExtractor = item => item.id;
