@@ -15,7 +15,6 @@ class NavigationHelper {
 
     setParams = (params: any) => {
         if (this.navigator != null) {
-            console.log(this.navigator);
             this.navigator.setParams(params);
         }
     };

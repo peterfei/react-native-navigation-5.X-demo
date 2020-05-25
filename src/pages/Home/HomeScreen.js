@@ -56,6 +56,7 @@ class Home extends PureComponent {
                 navigationHelper.setParams({
                     headerRight: _headerRight,
                     headerTitle: '123',
+                    title:"1111",
                 }); //FIXME: Navigation Tab 动态修改按钮not work
                 this.setState({
                     loading: false,
