@@ -86,7 +86,7 @@ class Home extends PureComponent {
                     scrollEventThrottle={16}
                     onEndReachedThreshold={0.01}
                     removeClippedSubviews
-                    windowSize={350} // 如果你的列表的2-3行占一屏的话，这个值应该设置450-600之前，如果四五行占一屏应该设置300-350之间
+                    windowSize={350} // 如果你的列表的2-3行占一屏的话，这个值应该设置450-600之前
                     data={listItems}
                     renderItem={({item, index}) => this.renderItem(item, index)}
                     keyExtractor={this.keyExtractor}
