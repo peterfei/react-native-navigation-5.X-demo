@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, useEffect} from 'react';
 import {StyleSheet, FlatList} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import {
@@ -13,6 +13,7 @@ import {
 } from 'react-native-ui-lib';
 import ListParagraph from '../../compoments/ListParagraph';
 import IconFont from '../../iconfont';
+import navigationHelper from '../../navigation/navigationHelper';
 ConnectionStatusBar.registerGlobalOnConnectionLost(() => {
     // console.warn('what what?!? connection has been lost');
 });
@@ -27,6 +28,7 @@ const listItems = [
     {id: '6', text: 'Item'},
     {id: '7', text: 'Item'},
 ];
+
 class Home extends PureComponent {
     keyExtractor = item => item.id;
     constructor(props) {
@@ -39,19 +41,22 @@ class Home extends PureComponent {
         };
         this.refreshScreen = this.refreshScreen.bind(this);
     }
+
     componentDidMount() {
-        this.props.navigation.setOptions({
-            headerRight: () => (
-                <IconFont
-                    name="tianjia"
-                    size={40}
-                    color={['green']}
-                    onPress={() => this.showActionSheet()}
-                />
-            ),
-        });
         setTimeout(
             function () {
+                const _headerRight = () => (
+                    <IconFont
+                        name="tianjia"
+                        size={40}
+                        color={['green']}
+                        onPress={() => this.showActionSheet()}
+                    />
+                );
+                navigationHelper.setParams({
+                    headerRight: _headerRight,
+                    headerTitle: '123',
+                }); //FIXME: Navigation Tab 动态修改按钮not work
                 this.setState({
                     loading: false,
                 });

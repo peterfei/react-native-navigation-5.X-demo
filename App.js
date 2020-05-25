@@ -1,6 +1,9 @@
 import * as React from 'react';
 import {Button, Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+    NavigationContainer,
+    NavigationContainerRef,
+} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IconFont from './src/iconfont';
@@ -9,9 +12,11 @@ import DetailsScreen from './src/pages/Home/Details';
 import FindScreen from './src/pages/Find/findScreen';
 import SettingsScreen from './src/pages/Settings/SettingsScreen';
 import theme from './Theme';
+import navigationHelper from './src/navigation/navigationHelper';
 
 const Tab = createBottomTabNavigator();
-function HomeTabs() {
+
+function HomeTabs({navigation, route}) {
     return (
         <Tab.Navigator
             screenOptions={({route}) => ({
@@ -36,22 +41,26 @@ function HomeTabs() {
                 activeTintColor: 'tomato',
                 inactiveTintColor: 'gray',
             }}>
-            <Tab.Screen name="课程" component={HomeScreen} />
+            <Tab.Screen
+                name="课程"
+                component={HomeScreen}
+                navigation={navigation}
+            />
             <Tab.Screen name="云课" component={FindScreen} />
             <Tab.Screen name="我的" component={SettingsScreen} />
         </Tab.Navigator>
     );
 }
 
-
-
 const RootStack = createStackNavigator();
-
+const _ref = (ref: NavigationContainerRef) => {
+    navigationHelper.setNavigator(ref);
+};
 export default function App() {
     return (
-        <NavigationContainer>
+        <NavigationContainer ref={_ref}>
             <RootStack.Navigator>
-                <RootStack.Screen name="Home" component={HomeTabs} />
+                <RootStack.Screen name="主页" component={HomeTabs} />
                 <RootStack.Screen name="Details" component={DetailsScreen} />
                 <RootStack.Screen name="Settings" component={SettingsScreen} />
             </RootStack.Navigator>
