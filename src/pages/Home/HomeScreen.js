@@ -1,5 +1,5 @@
 import React, {PureComponent, useEffect} from 'react';
-import {StyleSheet, FlatList, Image} from 'react-native';
+import {StyleSheet, FlatList, Image, TouchableOpacity} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import {
     View,
@@ -120,60 +120,64 @@ class Home extends PureComponent {
             </>
         );
     };
-
+    gotoDetail() {
+        this.props.navigation.navigate('Details');
+    }
     renderItem = (item, index) => {
         return (
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-around',
-                    backgroundColor: 'white',
-                }}
-                marginT-5
-                margin-10>
-                <View style={{flex: 2}}>
-                    <Image
-                        source={{uri: item.avatar}}
-                        style={{width: 120, height: 95}}
-                    />
+            <TouchableOpacity onPress={() => this.gotoDetail()}>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-around',
+                        backgroundColor: 'white',
+                    }}
+                    marginT-5
+                    margin-10>
+                    <View style={{flex: 2}}>
+                        <Image
+                            source={{uri: item.avatar}}
+                            style={{width: 120, height: 95}}
+                        />
+                    </View>
+                    <View style={{flex: 3, flexDirection: 'column'}}>
+                        <Text h1 bold>
+                            {item.name}
+                        </Text>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                justifyContent: 'flex-start',
+                                width: '80%',
+                            }}>
+                            <Text grey h4>
+                                ID:{item.id}
+                            </Text>
+                            <Text grey h4 marginL-5>
+                                ID:{item.total_num}
+                            </Text>
+                            <Text grey h4 marginL-5>
+                                ID:{item.id}
+                            </Text>
+                        </View>
+                        <View h2>
+                            <Text>电子商务</Text>
+                        </View>
+                        <View style={{flexDirection: 'row'}}>
+                            <Text grey h4>
+                                于涨
+                            </Text>
+                            <Text grey h4>
+                                /
+                            </Text>
+                            <Text grey h4>
+                                {' '}
+                                2020-05-26 16:37
+                            </Text>
+                        </View>
+                    </View>
                 </View>
-                <View style={{flex: 3, flexDirection: 'column'}}>
-                    <Text h1 bold>
-                        {item.name}
-                    </Text>
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            justifyContent: 'flex-start',
-                            width: '80%',
-                        }}>
-                        <Text grey h4>
-                            ID:{item.id}
-                        </Text>
-                        <Text grey h4 marginL-5>
-                            ID:{item.total_num}
-                        </Text>
-                        <Text grey h4 marginL-5>
-                            ID:{item.id}
-                        </Text>
-                    </View>
-                    <View h2>
-                        <Text>电子商务</Text>
-                    </View>
-                    <View style={{flexDirection: 'row'}}>
-                        <Text grey h4>
-                            于涨
-                        </Text>
-                        <Text grey h4>
-                            /
-                        </Text>
-                        <Text grey h4>
-                            {' '}
-                            2020-05-26 16:37
-                        </Text>
-                    </View>
-                </View>
-            </View>
+            </TouchableOpacity>
         );
     };
     render() {
