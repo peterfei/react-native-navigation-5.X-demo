@@ -5,7 +5,7 @@
 /** 网络请求工具类的拓展类，便于后期网络层修改维护 **/
 
 import HttpUtils from './HttpUtils';
-import api from '../../../api';
+import {API_URL} from '../../../api';
 import {dataCache} from '../cache';
 
 /**
@@ -20,7 +20,7 @@ import {dataCache} from '../cache';
  * 返回的值如果从缓存中取到数据就直接换行数据，或则返回promise对象
  */
 const fetchData = (isCache, requestType) => (url, params, callback) => {
-    url = `${api.API_URL}${url}`;
+    url = `${API_URL}${url}`;
     // debugger;
     const fetchFunc = () => {
         console.log('==请求url==========' + url);
