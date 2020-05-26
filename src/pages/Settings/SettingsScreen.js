@@ -16,6 +16,7 @@ class Settings extends PureComponent {
     componentDidMount() {
         navigationHelper.setParams({
             headerRight: null,
+            title:"Mine"
         });
     }
     render() {
