@@ -24,7 +24,7 @@ class Settings extends PureComponent {
                 <Text>Settings screen</Text>
                 <Button
                     title="Go to Details"
-                    onPress={() => this.props.navigation.navigate('Details')}
+                    onPress={() => this.props.navigation.navigate('Login')}
                 />
             </View>
         );

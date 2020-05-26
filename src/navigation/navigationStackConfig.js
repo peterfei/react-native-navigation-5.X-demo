@@ -4,6 +4,7 @@ import IconFont from '../../src/iconfont';
 import HomeScreen from '../../src/pages/Home/HomeScreen';
 import FindScreen from '../../src/pages/Find/findScreen';
 import SettingsScreen from '../../src/pages/Settings/SettingsScreen';
+import MoreScreen from '../../src/pages/More/moreScreen'
 
 import DetailsScreen from '../../src/pages/Home/Details';
 
@@ -42,6 +43,12 @@ const tabConfigs = {
         tabName: '我的',
         activeIcon: 'ziyuan',
         options: {tabBarLabel: '我的'},
+    },
+    more: {
+        screen: MoreScreen,
+        tabName: '更多',
+        activeIcon: 'ziyuan',
+        options: {tabBarLabel: '更多'},
     },
 };
 function HomeTabs({navigation, route}) {
