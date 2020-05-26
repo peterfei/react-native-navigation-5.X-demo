@@ -8,9 +8,15 @@ import {
     Button,
 } from 'react-native';
 
+import navigationHelper from '../../navigation/navigationHelper';
 class Settings extends PureComponent {
     constructor(props) {
         super(props);
+    }
+    componentDidMount() {
+        navigationHelper.setParams({
+            headerRight: null,
+        });
     }
     render() {
         return (
