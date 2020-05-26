@@ -1,5 +1,5 @@
 import React, {PureComponent, useEffect} from 'react';
-import {StyleSheet, FlatList} from 'react-native';
+import {StyleSheet, FlatList,Image} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import {
     View,
@@ -19,16 +19,6 @@ ConnectionStatusBar.registerGlobalOnConnectionLost(() => {
 });
 import {getFetch, postFetch} from '../../Common/network/request/HttpExtension';
 import {PATH} from '../../constants/urls';
-const listItems = [
-    {id: '0', text: 'Item'},
-    {id: '1', text: 'Item'},
-    {id: '2', text: 'Item'},
-    {id: '3', text: 'Item'},
-    {id: '4', text: 'Item'},
-    {id: '5', text: 'Item'},
-    {id: '6', text: 'Item'},
-    {id: '7', text: 'Item'},
-];
 
 class Home extends PureComponent {
     keyExtractor = item => item.id;
@@ -39,7 +29,7 @@ class Home extends PureComponent {
             lastRefresh: Date(Date.now()).toString(),
             loading: true,
             showNative: false,
-            courseLists:[]
+            courseLists: [],
         };
         this.refreshScreen = this.refreshScreen.bind(this);
     }
@@ -65,14 +55,14 @@ class Home extends PureComponent {
             }.bind(this),
             1000,
         );
-       const course_lists =  await this.getCourseLists();
-       this.setState({
-           courseLists: course_lists.data
-       })
+        const course_lists = await this.getCourseLists();
+        this.setState({
+            courseLists: course_lists.data,
+        });
     }
 
     getCourseLists() {
-       return  getFetch(PATH.COURSE_LIST, {});
+        return getFetch(PATH.COURSE_LIST, {});
     }
     showActionSheet() {
         this.setState({
@@ -130,72 +120,40 @@ class Home extends PureComponent {
             </>
         );
     };
-    renderHeader = () => {
-        return (
-            <View style={styles.headerButton}>
-                <Text
-                    style={styles.welcome}
-                    onPress={this.headerImageScrollView}>
-                    自定义头部图片 & 缩放!
-                </Text>
-            </View>
-        );
-    };
+
 
     renderItem = (item, index) => {
         return (
-            <View>
-                <Text primary>
-                    {item.name} #{item.id}
-                </Text>
+            <View style={{flexDirection:"row"}}>
+                <View >
+                    <Image source={{uri:item.avatar}} style={{width:80,height:80}}/>
+                </View>
+                <View >
+                    <Text>{item.name}</Text>
+                </View>
             </View>
         );
     };
     render() {
         return (
-            <ListParagraph
-                style={{flex: 1}}
-                ParagraphLength={this.state.courseLists.length}
-                isLoading={this.state.loading}
-                list={this.flatList}
-            />
+            <>
+                <ListParagraph
+                    style={{flex: 1}}
+                    ParagraphLength={
+                        this.state.courseLists.length == 0
+                            ? 5
+                            : this.state.courseLists.length
+                    }
+                    isLoading={this.state.loading}
+                    list={this.flatList}></ListParagraph>
+            </>
         );
-        //return (
-        //    <View flex center>
-        //        <ConnectionStatusBar
-        //            onConnectionChange={isConnected =>
-        //                this.setState({isConnected})
-        //            }
-        //            label="没有网络连接,请检查您的网络设置"
-        //        />
-        //        <Text darkText h2>
-        //            Home screen
-        //        </Text>
-        //        <Button
-        //            size="xSmall"
-        //            label="Go to Details"
-        //            onPress={() => this.props.navigation.navigate('Details')}
-        //        />
-        //        {this.state.isConnected ? null : (
-        //            <View style={styles.container}>
-        //                <Text style={{...Typography.text70}} grey>
-        //                    暂无网络,
-        //                </Text>
-        //                <Button
-        //                    size="small"
-        //                    label="手动刷新"
-        //                    link="true"
-        //                    onPress={this.refreshScreen}
-        //                />
-        //            </View>
-        //        )}
-        //    </View>
-        //);
+
     }
 }
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         backgroundColor: '#f3f3f3',
     },
 });
