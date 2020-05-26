@@ -140,7 +140,7 @@ class Home extends PureComponent {
                             style={{width: 120, height: 95}}
                         />
                     </View>
-                    <View style={{flex: 3, flexDirection: 'column'}}>
+                    <View style={{flex: 3, flexDirection: 'column',justifyContent:"center"}}>
                         <Text h1 bold>
                             {item.name}
                         </Text>
@@ -161,18 +161,18 @@ class Home extends PureComponent {
                             </Text>
                         </View>
                         <View h2>
-                            <Text>电子商务</Text>
+                            <Text>{item.college_name}</Text>
                         </View>
                         <View style={{flexDirection: 'row'}}>
                             <Text grey h4>
-                                于涨
+                                {item.author_name}
                             </Text>
                             <Text grey h4>
                                 /
                             </Text>
                             <Text grey h4>
-                                {' '}
-                                2020-05-26 16:37
+                                {item.created_at}
+
                             </Text>
                         </View>
                     </View>
