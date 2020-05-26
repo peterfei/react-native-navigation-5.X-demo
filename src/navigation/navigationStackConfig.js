@@ -9,6 +9,8 @@ import CourseCreate from '../../src/pages/More/courseCreate'
 
 import DetailsScreen from '../../src/pages/Home/Details';
 
+import OutLine from "../pages/Home/Outline/outline";
+
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
 
@@ -98,8 +100,14 @@ const configStackScreen = [
         componentName: SettingsScreen,
     },
     {
+<<<<<<< HEAD
         name: 'CourseCreate',
         componentName: CourseCreate,
     },
+=======
+        name:'outLine',
+        componentName: OutLine,
+    }
+>>>>>>> [Fix]添加大纲页
 ];
 export {configStackScreen};
