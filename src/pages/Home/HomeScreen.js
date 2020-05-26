@@ -17,7 +17,8 @@ import navigationHelper from '../../navigation/navigationHelper';
 ConnectionStatusBar.registerGlobalOnConnectionLost(() => {
     // console.warn('what what?!? connection has been lost');
 });
-
+import {getFetch, postFetch} from '../../Common/network/request/HttpExtension';
+import {PATH} from '../../constants/urls';
 const listItems = [
     {id: '0', text: 'Item'},
     {id: '1', text: 'Item'},
@@ -38,24 +39,25 @@ class Home extends PureComponent {
             lastRefresh: Date(Date.now()).toString(),
             loading: true,
             showNative: false,
+            courseLists:[]
         };
         this.refreshScreen = this.refreshScreen.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         setTimeout(
             function () {
                 const _headerRight = () => (
                     <IconFont
                         name="tianjia"
                         size={40}
-                        color={['green']}
+                        color={['red']}
                         onPress={() => this.showActionSheet()}
                     />
                 );
                 navigationHelper.setParams({
                     headerRight: _headerRight,
-                    title:"主页",
+                    title: '主页',
                 }); //FIXME: Navigation Tab 动态修改按钮not work
                 this.setState({
                     loading: false,
@@ -63,6 +65,14 @@ class Home extends PureComponent {
             }.bind(this),
             1000,
         );
+       const course_lists =  await this.getCourseLists();
+       this.setState({
+           courseLists: course_lists.data
+       })
+    }
+
+    getCourseLists() {
+       return  getFetch(PATH.COURSE_LIST, {});
     }
     showActionSheet() {
         this.setState({
@@ -94,7 +104,7 @@ class Home extends PureComponent {
                     onEndReachedThreshold={0.01}
                     removeClippedSubviews
                     windowSize={350} // 如果你的列表的2-3行占一屏的话，这个值应该设置450-600之前
-                    data={listItems}
+                    data={this.state.courseLists}
                     renderItem={({item, index}) => this.renderItem(item, index)}
                     keyExtractor={this.keyExtractor}
                 />
@@ -135,8 +145,8 @@ class Home extends PureComponent {
     renderItem = (item, index) => {
         return (
             <View>
-                <Text>
-                    {item.text} #{item.id}
+                <Text primary>
+                    {item.name} #{item.id}
                 </Text>
             </View>
         );
@@ -145,7 +155,7 @@ class Home extends PureComponent {
         return (
             <ListParagraph
                 style={{flex: 1}}
-                ParagraphLength={listItems.length}
+                ParagraphLength={this.state.courseLists.length}
                 isLoading={this.state.loading}
                 list={this.flatList}
             />
