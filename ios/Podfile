@@ -79,6 +79,8 @@ target 'IbodaoRn' do
 
   pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'IbodaoRnTests' do
     inherit! :complete
     # Pods for testing
