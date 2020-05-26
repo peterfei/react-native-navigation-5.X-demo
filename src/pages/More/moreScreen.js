@@ -1,6 +1,7 @@
 
 import React,{PureComponent} from 'react';
 import {StyleSheet,View,Button,FlatList,TouchableOpacity,Image,Text,Dimensions} from 'react-native';
+import navigationHelper from "../../navigation/navigationHelper";
 // import {Image,} from 'react-native-ui-lib';
 const width = Dimensions.get("window").width;
 class more extends PureComponent{
@@ -12,6 +13,16 @@ class more extends PureComponent{
                 {pic: 'http://static.ibodao.com/Public/uploads/images/2019/0902/5d6cbcffbf6b3.png?x-oss-process=image/resize,w_320,h_240',name:'备课区'},
                 {pic: 'http://static.ibodao.com/Public/uploads/images/2019/0902/5d6cbcffbf6b3.png?x-oss-process=image/resize,w_320,h_240',name:'社区'}],
         }
+    }
+    async componentDidMount(){
+        setTimeout(
+            function () {
+                navigationHelper.setParams({
+                    title: '更多',
+                })
+            }.bind(this),
+            1000,
+        );
     }
     render(){
         return(
@@ -37,7 +48,7 @@ class more extends PureComponent{
                 // this.props.navigation.navigate('CourseInfo',{category_id:item.id})
             }}>
                 <Image  roundAsCircle={true} source={{uri:item.pic}} style={styles.likeImg} />
-                <Text>{item.name}</Text>
+                <Text style={styles.textStyle}>{item.name}</Text>
             </TouchableOpacity>
         )
     }
@@ -47,5 +58,6 @@ const styles = StyleSheet.create({
     container: {flex: 1},
     likeItem: {width: width / 4, marginTop: 10},
     likeImg: {width: width / 4 - 40, height: width / 4 - 40, borderRadius: 5, alignSelf: 'center'},
+    textStyle:{alignSelf: 'center',padding:5}
 })
 export default more;
