@@ -45,7 +45,7 @@ class more extends PureComponent{
     renderLikeItem = ({ item,index }) => {
         return (
             <TouchableOpacity  style={styles.likeItem} onPress={() => {
-                // this.props.navigation.navigate('CourseInfo',{category_id:item.id})
+                this.props.navigation.navigate('CourseCreate')
             }}>
                 <Image  roundAsCircle={true} source={{uri:item.pic}} style={styles.likeImg} />
                 <Text style={styles.textStyle}>{item.name}</Text>

@@ -5,6 +5,7 @@ import HomeScreen from '../../src/pages/Home/HomeScreen';
 import FindScreen from '../../src/pages/Find/findScreen';
 import SettingsScreen from '../../src/pages/Settings/SettingsScreen';
 import MoreScreen from '../../src/pages/More/moreScreen'
+import CourseCreate from '../../src/pages/More/courseCreate'
 
 import DetailsScreen from '../../src/pages/Home/Details';
 
@@ -95,6 +96,10 @@ const configStackScreen = [
     {
         name: 'Settings',
         componentName: SettingsScreen,
+    },
+    {
+        name: 'CourseCreate',
+        componentName: CourseCreate,
     },
 ];
 export {configStackScreen};
