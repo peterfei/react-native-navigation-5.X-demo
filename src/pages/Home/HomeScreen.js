@@ -1,5 +1,5 @@
 import React, {PureComponent, useEffect} from 'react';
-import {StyleSheet, FlatList} from 'react-native';
+import {StyleSheet, FlatList, Image, TouchableOpacity} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import {
     View,
@@ -19,16 +19,6 @@ ConnectionStatusBar.registerGlobalOnConnectionLost(() => {
 });
 import {getFetch, postFetch} from '../../Common/network/request/HttpExtension';
 import {PATH} from '../../constants/urls';
-const listItems = [
-    {id: '0', text: 'Item'},
-    {id: '1', text: 'Item'},
-    {id: '2', text: 'Item'},
-    {id: '3', text: 'Item'},
-    {id: '4', text: 'Item'},
-    {id: '5', text: 'Item'},
-    {id: '6', text: 'Item'},
-    {id: '7', text: 'Item'},
-];
 
 class Home extends PureComponent {
     keyExtractor = item => item.id;
@@ -39,7 +29,7 @@ class Home extends PureComponent {
             lastRefresh: Date(Date.now()).toString(),
             loading: true,
             showNative: false,
-            courseLists:[]
+            courseLists: [],
         };
         this.refreshScreen = this.refreshScreen.bind(this);
     }
@@ -47,17 +37,64 @@ class Home extends PureComponent {
     async componentDidMount() {
         setTimeout(
             function () {
-                const _headerRight = () => (
-                    <IconFont
+                const _headerLeft = () => (
+                    /*<IconFont
                         name="tianjia"
                         size={40}
                         color={['red']}
                         onPress={() => this.showActionSheet()}
-                    />
+                    />*/
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            backgroundColor: 'white',
+                            width: 120,
+                            justifyContent: 'space-around',
+                        }}>
+                        <View
+                            style={{
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItem: 'center',
+                                alignSelf: 'center',
+                            }}>
+                            <View flex>
+                                <Button
+                                    label="推荐"
+                                    size="large"
+                                    link={true}
+                                    linkColor="black"
+                                    outline={true}
+                                    outlineColor="red"
+                                    outlineWidth={10}
+                                    labelStyle={{borderColor: 'red'}}></Button>
+                            </View>
+                            <View
+                                marginL-10
+                                style={{
+                                    borderStyle: 'solid',
+                                    borderBottomWidth: 1,
+                                    width: '30%',
+
+                                }}
+                            />
+                        </View>
+                        <View>
+                            <Button
+                                label="推荐"
+                                size="large"
+                                link={true}
+                                linkColor="black"
+                                outline={true}
+                                outlineColor="red"
+                                outlineWidth={10}
+                                labelStyle={{borderColor: 'red'}}></Button>
+                        </View>
+                    </View>
                 );
                 navigationHelper.setParams({
-                    headerRight: _headerRight,
-                    title: '主页',
+                    headerLeft: _headerLeft,
+                    title: '',
                 }); //FIXME: Navigation Tab 动态修改按钮not work
                 this.setState({
                     loading: false,
@@ -65,14 +102,14 @@ class Home extends PureComponent {
             }.bind(this),
             1000,
         );
-       const course_lists =  await this.getCourseLists();
-       this.setState({
-           courseLists: course_lists.data
-       })
+        const course_lists = await this.getCourseLists();
+        this.setState({
+            courseLists: course_lists.data,
+        });
     }
 
     getCourseLists() {
-       return  getFetch(PATH.COURSE_LIST, {});
+        return getFetch(PATH.COURSE_LIST, {});
     }
     showActionSheet() {
         this.setState({
@@ -130,72 +167,89 @@ class Home extends PureComponent {
             </>
         );
     };
-    renderHeader = () => {
-        return (
-            <View style={styles.headerButton}>
-                <Text
-                    style={styles.welcome}
-                    onPress={this.headerImageScrollView}>
-                    自定义头部图片 & 缩放!
-                </Text>
-            </View>
-        );
-    };
-
+    gotoDetail() {
+        this.props.navigation.navigate('Details');
+    }
     renderItem = (item, index) => {
         return (
-            <View>
-                <Text primary>
-                    {item.name} #{item.id}
-                </Text>
-            </View>
+            <TouchableOpacity onPress={() => this.gotoDetail()}>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-around',
+                        backgroundColor: 'white',
+                    }}
+                    marginT-5
+                    margin-10>
+                    <View style={{flex: 2}}>
+                        <Image
+                            source={{uri: item.avatar}}
+                            style={{width: 120, height: 95}}
+                        />
+                    </View>
+                    <View
+                        style={{
+                            flex: 3,
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                        }}>
+                        <Text h1 bold>
+                            {item.name}
+                        </Text>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                justifyContent: 'flex-start',
+                                width: '80%',
+                            }}>
+                            <Text grey h4>
+                                ID:{item.id}
+                            </Text>
+                            <Text grey h4 marginL-5>
+                                ID:{item.total_num}
+                            </Text>
+                            <Text grey h4 marginL-5>
+                                ID:{item.id}
+                            </Text>
+                        </View>
+                        <View h2>
+                            <Text>{item.college_name}</Text>
+                        </View>
+                        <View style={{flexDirection: 'row'}}>
+                            <Text grey h4>
+                                {item.author_name}
+                            </Text>
+                            <Text grey h4>
+                                /
+                            </Text>
+                            <Text grey h4>
+                                {item.created_at}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            </TouchableOpacity>
         );
     };
     render() {
         return (
-            <ListParagraph
-                style={{flex: 1}}
-                ParagraphLength={this.state.courseLists.length}
-                isLoading={this.state.loading}
-                list={this.flatList}
-            />
+            <>
+                <ListParagraph
+                    style={{flex: 1}}
+                    ParagraphLength={
+                        this.state.courseLists.length == 0
+                            ? 5
+                            : this.state.courseLists.length
+                    }
+                    isLoading={this.state.loading}
+                    list={this.flatList}></ListParagraph>
+            </>
         );
-        //return (
-        //    <View flex center>
-        //        <ConnectionStatusBar
-        //            onConnectionChange={isConnected =>
-        //                this.setState({isConnected})
-        //            }
-        //            label="没有网络连接,请检查您的网络设置"
-        //        />
-        //        <Text darkText h2>
-        //            Home screen
-        //        </Text>
-        //        <Button
-        //            size="xSmall"
-        //            label="Go to Details"
-        //            onPress={() => this.props.navigation.navigate('Details')}
-        //        />
-        //        {this.state.isConnected ? null : (
-        //            <View style={styles.container}>
-        //                <Text style={{...Typography.text70}} grey>
-        //                    暂无网络,
-        //                </Text>
-        //                <Button
-        //                    size="small"
-        //                    label="手动刷新"
-        //                    link="true"
-        //                    onPress={this.refreshScreen}
-        //                />
-        //            </View>
-        //        )}
-        //    </View>
-        //);
     }
 }
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         backgroundColor: '#f3f3f3',
     },
 });

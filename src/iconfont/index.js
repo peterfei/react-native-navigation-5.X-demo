@@ -2,6 +2,19 @@
 
 import React from 'react';
 
+import Iconfangshi from './Iconfangshi';
+import Iconchuangjian from './Iconchuangjian';
+import Iconlujing from './Iconlujing';
+import Iconzu from './Iconzu';
+import Iconpaichu from './Iconpaichu';
+import Iconpaichu1 from './Iconpaichu1';
+import Iconjuxingkaobei from './Iconjuxingkaobei';
+import Iconmulu1 from './Iconmulu1';
+import Iconfenxiang from './Iconfenxiang';
+import Iconhuodong1 from './Iconhuodong1';
+import Iconjingpinke from './Iconjingpinke';
+import Iconyunke from './Iconyunke';
+import Iconshequ from './Iconshequ';
 import Iconbofang from './Iconbofang';
 import Iconqq1 from './Iconqq1';
 import Iconweibo from './Iconweibo';
@@ -38,7 +51,6 @@ import Icontaobao from './Icontaobao';
 import Icontianjia1 from './Icontianjia1';
 import Iconshezhi from './Iconshezhi';
 import Icontuijian from './Icontuijian';
-import Iconshuaxin from './Iconshuaxin';
 import Iconshipin from './Iconshipin';
 import Iconerji from './Iconerji';
 import Iconrenqiiconx from './Iconrenqiiconx';
@@ -49,7 +61,6 @@ import Iconshezhi1 from './Iconshezhi1';
 import Iconshoucang from './Iconshoucang';
 import Iconbianji from './Iconbianji';
 import Iconpingfen from './Iconpingfen';
-import Iconfatie from './Iconfatie';
 import Iconhulianwang from './Iconhulianwang';
 import Iconwancheng from './Iconwancheng';
 import Iconquanbu from './Iconquanbu';
@@ -70,7 +81,6 @@ import Iconxuexizhong from './Iconxuexizhong';
 import Iconyixuexi from './Iconyixuexi';
 import Iconweixuexi from './Iconweixuexi';
 import Iconjingyin from './Iconjingyin';
-import Iconyidu from './Iconyidu';
 import Iconweixinzhifu from './Iconweixinzhifu';
 import Iconzhifubao from './Iconzhifubao';
 import Iconshanchu from './Iconshanchu';
@@ -98,13 +108,38 @@ import IconshouyeQian from './IconshouyeQian';
 import IconshouyeHou from './IconshouyeHou';
 import IconwodeQian from './IconwodeQian';
 import IcontaotaoHou from './IcontaotaoHou';
-import Iconhuodong1 from './Iconhuodong1';
-import Iconjingpinke from './Iconjingpinke';
-import Iconyunke from './Iconyunke';
-import Iconshequ from './Iconshequ';
+import Iconfatie from './Iconfatie';
+import Iconyidu from './Iconyidu';
+import Iconshuaxin from './Iconshuaxin';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'fangshi':
+      return <Iconfangshi {...rest} />;
+    case 'chuangjian':
+      return <Iconchuangjian {...rest} />;
+    case 'lujing':
+      return <Iconlujing {...rest} />;
+    case 'zu':
+      return <Iconzu {...rest} />;
+    case 'paichu':
+      return <Iconpaichu {...rest} />;
+    case 'paichu1':
+      return <Iconpaichu1 {...rest} />;
+    case 'juxingkaobei':
+      return <Iconjuxingkaobei {...rest} />;
+    case 'mulu1':
+      return <Iconmulu1 {...rest} />;
+    case 'fenxiang':
+      return <Iconfenxiang {...rest} />;
+    case 'huodong1':
+      return <Iconhuodong1 {...rest} />;
+    case 'jingpinke':
+      return <Iconjingpinke {...rest} />;
+    case 'yunke':
+      return <Iconyunke {...rest} />;
+    case 'shequ':
+      return <Iconshequ {...rest} />;
     case 'bofang':
       return <Iconbofang {...rest} />;
     case 'qq1':
@@ -177,8 +212,6 @@ const IconFont = ({ name, ...rest }) => {
       return <Iconshezhi {...rest} />;
     case 'tuijian':
       return <Icontuijian {...rest} />;
-    case 'shuaxin':
-      return <Iconshuaxin {...rest} />;
     case 'shipin':
       return <Iconshipin {...rest} />;
     case 'erji':
@@ -199,8 +232,6 @@ const IconFont = ({ name, ...rest }) => {
       return <Iconbianji {...rest} />;
     case 'pingfen':
       return <Iconpingfen {...rest} />;
-    case 'fatie-':
-      return <Iconfatie {...rest} />;
     case 'hulianwang':
       return <Iconhulianwang {...rest} />;
     case 'wancheng':
@@ -241,8 +272,6 @@ const IconFont = ({ name, ...rest }) => {
       return <Iconweixuexi {...rest} />;
     case 'jingyin':
       return <Iconjingyin {...rest} />;
-    case 'yidu':
-      return <Iconyidu {...rest} />;
     case 'weixinzhifu':
       return <Iconweixinzhifu {...rest} />;
     case 'zhifubao':
@@ -297,14 +326,12 @@ const IconFont = ({ name, ...rest }) => {
       return <IconwodeQian {...rest} />;
     case 'taotao-hou':
       return <IcontaotaoHou {...rest} />;
-    case 'huodong1':
-      return <Iconhuodong1 {...rest} />;
-    case 'jingpinke':
-      return <Iconjingpinke {...rest} />;
-    case 'yunke':
-      return <Iconyunke {...rest} />;
-    case 'shequ':
-      return <Iconshequ {...rest} />;
+    case 'fatie-':
+      return <Iconfatie {...rest} />;
+    case 'yidu':
+      return <Iconyidu {...rest} />;
+    case 'shuaxin':
+      return <Iconshuaxin {...rest} />;
   }
 
   return null;

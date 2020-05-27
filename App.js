@@ -8,7 +8,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import theme from './Theme';
 import navigationHelper from './src/navigation/navigationHelper';
-import {configStackScreen} from "./src/navigation/navigationStackConfig"
+import {configStackScreen} from './src/navigation/navigationStackConfig';
 
 const RootStack = createStackNavigator();
 const _ref = (ref: NavigationContainerRef) => {
@@ -18,11 +18,13 @@ export default function App() {
     return (
         <NavigationContainer ref={_ref}>
             <RootStack.Navigator>
-                {configStackScreen.map((m,v)=>{
-
+                {configStackScreen.map((m, v) => {
                     return (
-                        <RootStack.Screen name={m.name} component={m.componentName} />
-                    )
+                        <RootStack.Screen
+                            name={m.name}
+                            component={m.componentName}
+                        />
+                    );
                 })}
             </RootStack.Navigator>
         </NavigationContainer>

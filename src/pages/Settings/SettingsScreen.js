@@ -16,6 +16,7 @@ class Settings extends PureComponent {
     componentDidMount() {
         navigationHelper.setParams({
             headerRight: null,
+            title:"Mine"
         });
     }
     render() {
@@ -24,7 +25,7 @@ class Settings extends PureComponent {
                 <Text>Settings screen</Text>
                 <Button
                     title="Go to Details"
-                    onPress={() => this.props.navigation.navigate('Details')}
+                    onPress={() => this.props.navigation.navigate('Login')}
                 />
             </View>
         );
