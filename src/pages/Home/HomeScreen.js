@@ -37,17 +37,64 @@ class Home extends PureComponent {
     async componentDidMount() {
         setTimeout(
             function () {
-                const _headerRight = () => (
-                    <IconFont
+                const _headerLeft = () => (
+                    /*<IconFont
                         name="tianjia"
                         size={40}
                         color={['red']}
                         onPress={() => this.showActionSheet()}
-                    />
+                    />*/
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            backgroundColor: 'white',
+                            width: 120,
+                            justifyContent: 'space-around',
+                        }}>
+                        <View
+                            style={{
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItem: 'center',
+                                alignSelf: 'center',
+                            }}>
+                            <View flex>
+                                <Button
+                                    label="推荐"
+                                    size="large"
+                                    link={true}
+                                    linkColor="black"
+                                    outline={true}
+                                    outlineColor="red"
+                                    outlineWidth={10}
+                                    labelStyle={{borderColor: 'red'}}></Button>
+                            </View>
+                            <View
+                                marginL-10
+                                style={{
+                                    borderStyle: 'solid',
+                                    borderBottomWidth: 1,
+                                    width: '30%',
+
+                                }}
+                            />
+                        </View>
+                        <View>
+                            <Button
+                                label="推荐"
+                                size="large"
+                                link={true}
+                                linkColor="black"
+                                outline={true}
+                                outlineColor="red"
+                                outlineWidth={10}
+                                labelStyle={{borderColor: 'red'}}></Button>
+                        </View>
+                    </View>
                 );
                 navigationHelper.setParams({
-                    headerRight: _headerRight,
-                    title: '主页',
+                    headerLeft: _headerLeft,
+                    title: '',
                 }); //FIXME: Navigation Tab 动态修改按钮not work
                 this.setState({
                     loading: false,
@@ -140,7 +187,12 @@ class Home extends PureComponent {
                             style={{width: 120, height: 95}}
                         />
                     </View>
-                    <View style={{flex: 3, flexDirection: 'column',justifyContent:"center"}}>
+                    <View
+                        style={{
+                            flex: 3,
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                        }}>
                         <Text h1 bold>
                             {item.name}
                         </Text>
@@ -172,7 +224,6 @@ class Home extends PureComponent {
                             </Text>
                             <Text grey h4>
                                 {item.created_at}
-
                             </Text>
                         </View>
                     </View>
