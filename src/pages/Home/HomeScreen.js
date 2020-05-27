@@ -30,27 +30,60 @@ class Home extends PureComponent {
             loading: true,
             showNative: false,
             courseLists: [],
+            headerTabContent: [
+                {tabName: '推荐', tabKey: 'top', buttonSize: 'large'},
+                {tabName: '个人', tabKey: 'personal', buttonSize: 'small'},
+            ],
+            tempTabKey: 'top',
         };
         this.refreshScreen = this.refreshScreen.bind(this);
     }
-
+    changeTab(key) {
+        this.setState({tempTabKey: key});
+        this.setHeader();
+        const _params = {ordering: '1'};
+        this.setContent(key, _params);
+    }
     async componentDidMount() {
         setTimeout(
             function () {
-                const _headerLeft = () => (
-                    /*<IconFont
-                        name="tianjia"
-                        size={40}
-                        color={['red']}
-                        onPress={() => this.showActionSheet()}
-                    />*/
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            backgroundColor: 'white',
-                            width: 120,
-                            justifyContent: 'space-around',
-                        }}>
+                this.setState({
+                    loading: false,
+                });
+                const _params = {ordering: '1'};
+                this.setContent(this.state.headerTabContent[0].tabKey, _params);
+
+                this.setHeader();
+            }.bind(this),
+            1000,
+        );
+    }
+    async setContent(key, params = '') {
+        const course_lists = await this.getCourseLists(key, params);
+        this.setState({
+            courseLists: course_lists.data,
+        });
+    }
+    setHeader() {
+        const _headerRight = () => (
+            <View marginL-20 style={{flexDirection: 'row', width: 30}}>
+                <IconFont
+                    name="shouqi"
+                    color={['black']}
+                    onPress={() => this.showActionSheet()}
+                />
+            </View>
+        );
+        const _headerLeft = () => (
+            <View
+                style={{
+                    flexDirection: 'row',
+                    backgroundColor: 'white',
+                    width: 120,
+                    justifyContent: 'space-around',
+                }}>
+                {this.state.headerTabContent.map((v, k) => {
+                    return (
                         <View
                             style={{
                                 flexDirection: 'column',
@@ -58,58 +91,58 @@ class Home extends PureComponent {
                                 alignItem: 'center',
                                 alignSelf: 'center',
                             }}>
-                            <View flex>
+                            <View>
                                 <Button
-                                    label="推荐"
-                                    size="large"
+                                    label={v.tabName}
+                                    size={
+                                        this.state.tempTabKey == v.tabKey
+                                            ? 'large'
+                                            : 'small'
+                                    }
                                     link={true}
                                     linkColor="black"
                                     outline={true}
                                     outlineColor="red"
                                     outlineWidth={10}
-                                    labelStyle={{borderColor: 'red'}}></Button>
+                                    labelStyle={{
+                                        borderColor: 'red',
+                                    }}
+                                    onPress={() =>
+                                        this.changeTab(v.tabKey)
+                                    }></Button>
                             </View>
-                            <View
-                                marginL-10
-                                style={{
-                                    borderStyle: 'solid',
-                                    borderBottomWidth: 1,
-                                    width: '30%',
-
-                                }}
-                            />
+                            {this.state.tempTabKey == v.tabKey ? (
+                                <View
+                                    marginL-10
+                                    style={{
+                                        borderStyle: 'solid',
+                                        borderBottomWidth: 2,
+                                        width: '40%',
+                                        borderBottomColor: 'red',
+                                    }}
+                                />
+                            ) : null}
                         </View>
-                        <View>
-                            <Button
-                                label="推荐"
-                                size="large"
-                                link={true}
-                                linkColor="black"
-                                outline={true}
-                                outlineColor="red"
-                                outlineWidth={10}
-                                labelStyle={{borderColor: 'red'}}></Button>
-                        </View>
-                    </View>
-                );
-                navigationHelper.setParams({
-                    headerLeft: _headerLeft,
-                    title: '',
-                }); //FIXME: Navigation Tab 动态修改按钮not work
-                this.setState({
-                    loading: false,
-                });
-            }.bind(this),
-            1000,
+                    );
+                })}
+            </View>
         );
-        const course_lists = await this.getCourseLists();
-        this.setState({
-            courseLists: course_lists.data,
+        navigationHelper.setParams({
+            headerLeft: _headerLeft,
+            headerRight: _headerRight,
+            title: '主页',
         });
     }
-
-    getCourseLists() {
-        return getFetch(PATH.COURSE_LIST, {});
+    getCourseLists(key, params) {
+        switch (key) {
+            case 'top':
+                return getFetch(PATH.COURSE_LIST, params);
+                break;
+            case 'personal':
+                return getFetch(PATH.COURSE_LIST_MINE, params);
+                break;
+            default:
+        }
     }
     showActionSheet() {
         this.setState({

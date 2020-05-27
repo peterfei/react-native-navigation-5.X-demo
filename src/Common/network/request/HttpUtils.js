@@ -7,7 +7,7 @@
 import {Component} from 'react';
 import {Toast} from '../../toast';
 // import { RootHUD } from "../../progressHUD";
-
+import {TOKEN} from '../../../api'
 /**
  * fetch 网络请求的header，可自定义header 内容
  * @type {{Accept: string, Content-Type: string, accessToken: *}}
@@ -16,9 +16,8 @@ import {Toast} from '../../toast';
 let header = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    // Autshorization: "Bearer " + token
+    Authorization: "Bearer " + TOKEN
 };
-
 /**
  * GET 请求时，拼接请求URL
  * @param url 请求URL
@@ -69,6 +68,9 @@ const timeoutFetch = (original_fetch, timeout = 30000) => {
 };
 
 export default class HttpUtils extends Component {
+    static setHeader = (headerParams) =>{
+         header = Object.assign(header,headerParams)
+    }
     /**
      * 基于fetch 封装的GET 网络请求
      * @param url 请求URL
