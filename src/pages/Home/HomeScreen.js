@@ -271,10 +271,20 @@ class Home extends PureComponent {
                     list={this.flatList}></ListParagraph>
                 {this.state.showNative ? (
                     <>
-                        <Animated.View style={styles.mask}></Animated.View>
+                        <TouchableOpacity
+                            onPress={() => {
+                                this.setState({
+                                    showNative: !this.state.showNative,
+                                });
+                            }}>
+                            <Animated.View style={styles.mask}></Animated.View>
+                        </TouchableOpacity>
                         <View style={styles.boxes}>
-                            <View>
-                                <Text>messageBox</Text>
+                            <View flex>
+                                <View style={{flexDirection:"row",margin:5,justifyContent:"space-between",width:"40%"}}>
+                                    <IconFont name="shouqi" color={['black']} />
+                                    <Button label="搜索" size="medium" link={true} linkColor="black" />
+                                </View>
                             </View>
                         </View>
                     </>

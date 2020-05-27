@@ -2,6 +2,12 @@
 
 import React from 'react';
 
+import Icontaolun from './Icontaolun';
+import Iconsangedian from './Iconsangedian';
+import Icongengduo from './Icongengduo';
+import Iconjiaoxuedagang from './Iconjiaoxuedagang';
+import IconarrDnRFillCopy from './IconarrDnRFillCopy';
+import IconarrDnRFillCopyCopy from './IconarrDnRFillCopyCopy';
 import Iconfangshi from './Iconfangshi';
 import Iconchuangjian from './Iconchuangjian';
 import Iconlujing from './Iconlujing';
@@ -114,6 +120,18 @@ import Iconshuaxin from './Iconshuaxin';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'taolun':
+      return <Icontaolun {...rest} />;
+    case 'sangedian':
+      return <Iconsangedian {...rest} />;
+    case 'gengduo':
+      return <Icongengduo {...rest} />;
+    case 'jiaoxuedagang':
+      return <Iconjiaoxuedagang {...rest} />;
+    case 'arrDnR-fill-copy':
+      return <IconarrDnRFillCopy {...rest} />;
+    case 'arrDnR-fill-copy-copy':
+      return <IconarrDnRFillCopyCopy {...rest} />;
     case 'fangshi':
       return <Iconfangshi {...rest} />;
     case 'chuangjian':
