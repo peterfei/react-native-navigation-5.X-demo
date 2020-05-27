@@ -1,5 +1,11 @@
-import React, {PureComponent, useEffect} from 'react';
-import {StyleSheet, FlatList, Image, TouchableOpacity} from 'react-native';
+import React, {PureComponent, useEffect, useState} from 'react';
+import {
+    StyleSheet,
+    FlatList,
+    Image,
+    TouchableOpacity,
+    Animated,
+} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import {
     View,
@@ -66,13 +72,12 @@ class Home extends PureComponent {
     }
     setHeader() {
         const _headerRight = () => (
-            <View marginL-20 style={{flexDirection: 'row', width: 30}}>
-                <IconFont
-                    name="shouqi"
-                    color={['black']}
-                    onPress={() => this.showActionSheet()}
-                />
-            </View>
+            <TouchableOpacity
+                onPress={() => this.showActionSheet()}
+                marginL-20
+                style={{flexDirection: 'row', width: 30}}>
+                <IconFont name="shouqi" color={['black']} />
+            </TouchableOpacity>
         );
         const _headerLeft = () => (
             <View
@@ -99,6 +104,13 @@ class Home extends PureComponent {
                                             ? 'large'
                                             : 'small'
                                     }
+                                    labelStyle={{
+                                        fontWeight:
+                                            this.state.tempTabKey == v.tabKey
+                                                ? 1000
+                                                : 100,
+                                        fontSize: 18,
+                                    }}
                                     link={true}
                                     linkColor="black"
                                     outline={true}
@@ -146,7 +158,7 @@ class Home extends PureComponent {
     }
     showActionSheet() {
         this.setState({
-            showNative: true,
+            showNative: !this.state.showNative,
         });
     }
 
@@ -177,25 +189,6 @@ class Home extends PureComponent {
                     data={this.state.courseLists}
                     renderItem={({item, index}) => this.renderItem(item, index)}
                     keyExtractor={this.keyExtractor}
-                />
-                <ActionSheet
-                    title="Title"
-                    message="Message of action sheet"
-                    cancelButtonIndex={3}
-                    destructiveButtonIndex={0}
-                    options={[
-                        {
-                            label: 'option 1',
-                            onPress: () => this.pickOption('option 1'),
-                        },
-                        {
-                            label: 'cancel',
-                            onPress: () => this.pickOption('cancel'),
-                        },
-                    ]}
-                    visible={this.state.showNative}
-                    useNativeIOS
-                    onDismiss={() => this.setState({showNative: false})}
                 />
             </>
         );
@@ -276,6 +269,16 @@ class Home extends PureComponent {
                     }
                     isLoading={this.state.loading}
                     list={this.flatList}></ListParagraph>
+                {this.state.showNative ? (
+                    <>
+                        <Animated.View style={styles.mask}></Animated.View>
+                        <View style={styles.boxes}>
+                            <View>
+                                <Text>messageBox</Text>
+                            </View>
+                        </View>
+                    </>
+                ) : null}
             </>
         );
     }
@@ -284,6 +287,20 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         backgroundColor: '#f3f3f3',
+    },
+    mask: {
+        backgroundColor: 'lightgrey',
+        height: '100%',
+    },
+    boxes: {
+        top: '10%',
+        backgroundColor: '#fff',
+        width: '40%',
+        height: 60,
+        flex: 1,
+        position: 'absolute',
+        right: 10,
+        top: 8,
     },
 });
 
