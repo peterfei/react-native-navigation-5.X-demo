@@ -22,6 +22,10 @@ export default class OutLine extends Component {
             {
                 id:'0',
                 title:'第1章 开宗明义【告诉你：学什么+收获什么】',
+                video:3,
+                test:6,
+                task:2,
+                ziliao:1,
                 show:true,
                 data:[
                     {id:'1',title:'1-1 Java并发成神之路——精通JUC并发工具…'} ,
@@ -34,7 +38,7 @@ export default class OutLine extends Component {
                 video:3,
                 test:6,
                 task:2,
-                // data:1,
+                ziliao:1,
                 show:true,
                 data:[
                     {id:'1',title:'2-1 基本类型'} ,
@@ -107,13 +111,17 @@ export default class OutLine extends Component {
 
     _renderSectionHeader=(item)=>{
         return  (
-            <TouchableOpacity style={{height:40,justifyContent:'center'}} onPress={this.handlerSectionHeader.bind(this, item)}>
-                <View>
-                    <View style={{flex:1,flexDirection:'row'}}>
-                        <Icon name="tianjia" size={28} color={['red']}/>
-                        <Text style={{fontSize:30,color:'#303133'}}>{item.section.title}</Text>
+            <TouchableOpacity style={{backgroundColor:'white',height:60,justifyContent:'center',margin:5}} onPress={this.handlerSectionHeader.bind(this, item)}>
+                    <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
+                        <Icon name="paichu" size={14} color={'#303133'} style={{marginLeft:10,marginRight:10}}/>
+                        <Text style={{fontSize:15,color:'#303133'}}>{item.section.title}</Text>
                     </View>
-                </View>
+                    <View style={{flex:1,flexDirection:'row',justifyContent:'space-around',alignItems:'center'}}>
+                        <Text>视频课：{item.section.video}</Text>
+                        <Text>测试：{item.section.test}</Text>
+                        <Text>作业：{item.section.task}</Text>
+                        <Text>资料：{item.section.ziliao}</Text>
+                    </View>
             </TouchableOpacity>);
     }
 
