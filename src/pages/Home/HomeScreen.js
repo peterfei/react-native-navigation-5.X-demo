@@ -281,9 +281,38 @@ class Home extends PureComponent {
                         </TouchableOpacity>
                         <View style={styles.boxes}>
                             <View flex>
-                                <View style={{flexDirection:"row",margin:5,justifyContent:"space-between",width:"40%"}}>
-                                    <IconFont name="shouqi" color={['black']} />
-                                    <Button label="搜索" size="medium" link={true} linkColor="black" />
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        margin: 5,
+                                        justifyContent: 'space-between',
+                                        width: '40%',
+                                    }}>
+                                    <IconFont name="sousuo" color={['black']} />
+                                    <Button
+                                        label="搜索"
+                                        size="medium"
+                                        link={true}
+                                        linkColor="black"
+                                    />
+                                </View>
+                            </View>
+
+                            <View flex>
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        margin: 5,
+                                        justifyContent: 'space-between',
+                                        width: '55%',
+                                    }}>
+                                    <IconFont name="tianjia2" color={['black']} />
+                                    <Button
+                                        label="创建课程"
+                                        size="medium"
+                                        link={true}
+                                        linkColor="black"
+                                    />
                                 </View>
                             </View>
                         </View>
