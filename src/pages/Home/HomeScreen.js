@@ -160,7 +160,6 @@ class Home extends PureComponent {
         this.setState({
             showNative: !this.state.showNative,
         });
-        this.props.navigation.navigate('detailsIndex')
     }
 
     pickOption(index) {

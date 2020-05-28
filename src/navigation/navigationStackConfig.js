@@ -1,19 +1,18 @@
-
 import * as React from 'react';
 import IconFont from '../../src/iconfont';
 import HomeScreen from '../../src/pages/Home/HomeScreen';
 import FindScreen from '../../src/pages/Find/findScreen';
 import SettingsScreen from '../../src/pages/Settings/SettingsScreen';
-import MoreScreen from '../../src/pages/More/moreScreen'
-import CourseCreate from '../../src/pages/More/courseCreate'
+import MoreScreen from '../../src/pages/More/moreScreen';
+import CourseCreate from '../../src/pages/More/courseCreate';
 
 import DetailsScreen from '../../src/pages/Home/Details';
 
-import OutLine from "../pages/Home/Outline/outline";
-import ReleaseSection from "../pages/Home/Outline/releasesection";
+import OutLine from '../pages/Home/Outline/outline';
+import ReleaseSection from '../pages/Home/Outline/releasesection';
 
-import Login from "../pages/Login/loginIndex";
-import RegisterAndReset from "../pages/Login/registerIndex";
+import Login from '../pages/Login/loginIndex';
+import RegisterAndReset from '../pages/Login/registerIndex';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
@@ -104,12 +103,11 @@ const configStackScreen = [
         componentName: SettingsScreen,
     },
     {
-<<<<<<< HEAD
         name: 'CourseCreate',
         componentName: CourseCreate,
     },
-=======
-        name:'outLine',
+    {
+        name: 'outLine',
         componentName: OutLine,
     },
     {
@@ -118,12 +116,11 @@ const configStackScreen = [
     },
     {
         name: 'login',
-        componentName:Login,
+        componentName: Login,
     },
     {
         name: 'RegisterAndReset',
-        componentName:RegisterAndReset,
-    }
->>>>>>> [Fix]添加大纲页
+        componentName: RegisterAndReset,
+    },
 ];
 export {configStackScreen};
