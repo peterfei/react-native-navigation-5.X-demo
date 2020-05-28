@@ -8,7 +8,7 @@ const IconarrDnRFillCopy = ({ size, color, ...rest }) => {
   return (
     <Svg viewBox="0 0 1024 1024" width={size} height={size} {...rest}>
       <Path
-        d="M505.47806844 789.11115838l279.65492249-279.65492249-278.8075161-278.8075161z"
+        d="M287.0083795 1007.35040931l499.89751813-499.89751813-498.38273573-498.38273573z"
         fill={getIconColor(color, 0, '#333333')}
       />
     </Svg>

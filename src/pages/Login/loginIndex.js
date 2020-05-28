@@ -254,10 +254,8 @@ export default class Login extends Component {
         try{
             const login_data = postFetch(PATH.LOGIN,{'username':this.state.username,'password':this.state.password});
         }catch(e){
-            alert(111)
         }
 
-        alert(login_data);
 
     }
 
