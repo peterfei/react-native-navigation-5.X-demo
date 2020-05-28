@@ -4,10 +4,11 @@
 
 /** 基于fetch 封装的网络请求工具类 **/
 
-import {Component} from 'react';
+import {Component, useEffect} from 'react';
 import {Toast} from '../../toast';
 // import { RootHUD } from "../../progressHUD";
-import {TOKEN} from '../../../api'
+//import {TOKEN} from '../../../api'
+import AsyncStorage from '@react-native-community/async-storage';
 /**
  * fetch 网络请求的header，可自定义header 内容
  * @type {{Accept: string, Content-Type: string, accessToken: *}}
@@ -16,7 +17,7 @@ import {TOKEN} from '../../../api'
 let header = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: "Bearer " + TOKEN
+    /*Authorization: 'Bearer ' + userToken,*/
 };
 /**
  * GET 请求时，拼接请求URL
@@ -68,8 +69,13 @@ const timeoutFetch = (original_fetch, timeout = 30000) => {
 };
 
 export default class HttpUtils extends Component {
-    static setHeader = (headerParams) =>{
-         header = Object.assign(header,headerParams)
+
+    static async setHeader() {
+        let token = await AsyncStorage.getItem('userToken');
+        console.log("token",token)
+        return Object.assign(header, {
+            Authorization: 'Bearer ' + token
+        });
     }
     /**
      * 基于fetch 封装的GET 网络请求
@@ -77,13 +83,14 @@ export default class HttpUtils extends Component {
      * @param params 请求参数
      * @returns {Promise}
      */
-    static getRequest = (url, params = {}) => {
-        //   debugger;
-        // RootHUD.show();
+    static getRequest =async (url, params = {}) => {
+
+             let _h = await this.setHeader()
+             console.log(_h)
         return timeoutFetch(
             fetch(handleUrl(url)(params), {
                 method: 'GET',
-                headers: header,
+                headers: _h,
             }),
         )
             .then(response => {
@@ -119,12 +126,13 @@ export default class HttpUtils extends Component {
      * @param params 请求参数
      * @returns {Promise}
      */
-    static postRequrst = (url, params = {}) => {
+    static postRequrst =async (url, params = {}) => {
         // RootHUD.show();
+            let _h = await this.setHeader()
         return timeoutFetch(
             fetch(url, {
                 method: 'POST',
-                headers: header,
+                headers: _h,
                 body: JSON.stringify(params),
             }),
         )
