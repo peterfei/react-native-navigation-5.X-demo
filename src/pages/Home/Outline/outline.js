@@ -17,13 +17,16 @@ export default class OutLine extends Component {
             value: 42,
             cellDataArray:[],
             showNative:false,
+            chapters_data:{}
 
         };
 
         this.cellDatas = [
             {
                 id:'0',
+                course_id:1,
                 title:'第1章 开宗明义【告诉你：学什么+收获什么】',
+                content:"哈哈你猜我发现了什么？",
                 video:3,
                 test:6,
                 task:2,
@@ -36,7 +39,9 @@ export default class OutLine extends Component {
             },
             {
                 id:'1',
+                course_id:1,
                 title:'第2章 类型初步',
+                content:"哈哈你猜我发现了什么？",
                 video:3,
                 test:6,
                 task:2,
@@ -54,7 +59,10 @@ export default class OutLine extends Component {
 
         this.props.navigation.setOptions({
             headerRight:()=>(
-                <Icon name='tianjia1' size={24} color={'#606366'} style={{marginRight:20}} onPress={this._goRelease.bind(this)}/>
+                <TouchableOpacity  onPress={this._goRelease.bind(this)}>
+                    <Icon name='tianjia1' size={24} color={'#606366'} style={{marginRight:20}}/>
+                </TouchableOpacity>
+
             )
         });
 
@@ -140,15 +148,17 @@ export default class OutLine extends Component {
                         <Text style={styles.headerText}>资料：{item.section.ziliao}</Text>
                     </View>
                 </TouchableOpacity>
-                <Icon name={'icon-test1'} size={25} color={'#C0C6CC'} style={{marginRight:10}} onPress={()=>{this.setState({showNative:!this.state.showNative})}}/>
+                <TouchableOpacity style={{padding:10}} onPress={()=>{this.setState({showNative:!this.state.showNative,chapters_data:item.section})}}>
+                    <Icon name={'icon-test1'} size={25} color={'#C0C6CC'} style={{marginRight:10}} />
+                </TouchableOpacity>
+
             </View>
         );
     }
-
     pickOption(num){
         switch (num) {
             case 1:
-                this.props.navigation.navigate('releasesection')
+                this.props.navigation.navigate('releasesection',{chapters_data:this.state.chapters_data})
                 break;
             case 2:
                 break;

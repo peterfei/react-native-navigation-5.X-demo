@@ -340,7 +340,6 @@ const styles = StyleSheet.create({
         flex: 1,
         position: 'absolute',
         right: 10,
-        top: 8,
     },
 });
 
