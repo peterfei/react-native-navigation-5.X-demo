@@ -330,6 +330,7 @@ const styles = StyleSheet.create({
     mask: {
         backgroundColor: 'lightgrey',
         height: '100%',
+        opacity: 1
     },
     boxes: {
         top: '10%',

@@ -171,17 +171,15 @@ export default class Login extends Component {
 
                     <Button
                         title={'登录'}
-                        titleStyle={{ color: '#FFFFFF', fontSize: 17 }}
+                        titleStyle={{ color: '#000', fontSize: 17 }}
                         buttonStyle={{
-                            backgroundColor: color.orange,
                             margin: 10,
-                            height: 55
+                            height: 55,
                         }}
-                        disabled={
+                        type="outline"
+                        /*disabled={
                             this.state.username.length < 11 && this.state.password.length < 6
-                        }
-                        disabledStyle={{ backgroundColor: color.gray }}
-                        disabledTitleStyle={{ color: '#FFFFFF', fontSize: 17 }}
+                        }*/
                         onPress={this._onClickLogin}
                     />
 
@@ -253,7 +251,11 @@ export default class Login extends Component {
 
     _onClickLogin = () => {
         //登录
-        const login_data = postFetch(PATH.LOGIN,{'username':this.state.username,'password':this.state.password});
+        try{
+            const login_data = postFetch(PATH.LOGIN,{'username':this.state.username,'password':this.state.password});
+        }catch(e){
+            alert(111)
+        }
 
         alert(login_data);
 
