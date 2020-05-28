@@ -9,16 +9,21 @@ import {
 } from 'react-native'
 import { size, isIPhoneXPaddTop,isIPhoneXFooter } from '../../../src/Common/tool/ScreenUtil';
 
-import { postFetch } from '../../../src/Common/network/request/HttpUtils';
+import { postFetch } from '../../Common/network/request/HttpExtension';
 
-import {Icon} from 'react-native-elements';
+import Icon from "../../iconfont/index";
 import color from '../../../Theme';
 import Toast, { DURATION } from 'react-native-easy-toast'
 
 const width = Dimensions.get('window').width
 import { Header, Text, Input, Button } from 'react-native-elements'
+import {getFetch} from "../../Common/network/request/HttpExtension";
+import {PATH} from "../../constants/urls";
+import navigationHelper from "../../navigation/navigationHelper";
+import navigation from "../../navigation/navigationHelper";
 
 export default class Login extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -35,6 +40,12 @@ export default class Login extends Component {
         this.pass_input = React.createRef()
         this._onClickLogin = this._onClickLogin.bind(this) //登录
         this._getPhoneCode = this._getPhoneCode.bind(this) //获取验证码
+    }
+
+    componentDidMount() {
+        this.props.navigation.setOptions({
+            headerShown:false
+        });
     }
 
     render() {
@@ -242,6 +253,14 @@ export default class Login extends Component {
 
     _onClickLogin = () => {
         //登录
+        const login_data = postFetch(PATH.LOGIN,{'username':this.state.username,'password':this.state.password});
+
+        alert(login_data);
+
+    }
+
+    getCourseLists() {
+        return getFetch(PATH.COURSE_LIST, {});
     }
 
     _otherClick(num) {

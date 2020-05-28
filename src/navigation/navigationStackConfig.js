@@ -9,6 +9,12 @@ import CourseCreate from '../../src/pages/More/courseCreate'
 
 import DetailsScreen from '../../src/pages/Home/Details';
 
+import OutLine from "../pages/Home/Outline/outline";
+import ReleaseSection from "../pages/Home/Outline/releasesection";
+
+import Login from "../pages/Login/loginIndex";
+import RegisterAndReset from "../pages/Login/registerIndex";
+
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
 
@@ -98,8 +104,26 @@ const configStackScreen = [
         componentName: SettingsScreen,
     },
     {
+<<<<<<< HEAD
         name: 'CourseCreate',
         componentName: CourseCreate,
     },
+=======
+        name:'outLine',
+        componentName: OutLine,
+    },
+    {
+        name: 'releasesection',
+        componentName: ReleaseSection,
+    },
+    {
+        name: 'login',
+        componentName:Login,
+    },
+    {
+        name: 'RegisterAndReset',
+        componentName:RegisterAndReset,
+    }
+>>>>>>> [Fix]添加大纲页
 ];
 export {configStackScreen};

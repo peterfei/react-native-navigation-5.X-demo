@@ -1,5 +1,7 @@
-const PATH = {
+const PATH={
     COURSE_LIST: '/api/class_course/courses',
     COURSE_LIST_MINE: '/api/class_course/courses/mine',
-};
-export {PATH};
+    LOGIN:"/api/login",
+    ADDCHAPTERS:"/api/class_course/courses/:courseId/chapters",
+}
+export {PATH}

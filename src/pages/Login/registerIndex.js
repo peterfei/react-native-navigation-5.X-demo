@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Dimensions, Text, TouchableOpacity} from 'react-native'
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {Input, Button} from "react-native-elements";
 import Toast, {DURATION} from 'react-native-easy-toast'
-import HttpsUtils from "../../Tools/HttpsUtils";
-import Tools from "../../Tools/tools";
-import DeviceStorage from "../../Tools/DeviceStorage";
+import Icon from "../../iconfont/index";
 
 export default class RegisterIndex extends Component {
 
-    static navigationOptions = {
-        title: '注册',
-    };
+    componentDidMount() {
+        this.props.navigation.setOptions({
+            headerBackTitle:"",
+            title:this.props.route.params.type=1?"注册":"密码找回",//this.props.navigation.params.type==1?"注册":"密码找回"
+
+        });
+    }
 
     constructor(props) {
         super(props);
@@ -19,6 +20,7 @@ export default class RegisterIndex extends Component {
         this._register = this._register.bind(this);
         this._get_UserInfo = this._get_UserInfo.bind(this);
         this.state = {
+            type:0,
             username: '',
             password: '',
             other_password: '',
@@ -42,7 +44,7 @@ export default class RegisterIndex extends Component {
                         shake={true}
                         inputStyle={{fontSize: 14}}
                         placeholder='用户名'
-                        leftIcon={<FontAwesomeIcon name='user' size={24} color='#FF783C'/>
+                        leftIcon={<Icon name='user' size={24} color='#FF783C'/>
 
                         }
                         leftIconContainerStyle={{marginRight: 20}}
@@ -58,7 +60,7 @@ export default class RegisterIndex extends Component {
                         inputStyle={{fontSize: 12}}
                         ref='verify_code'
                         shake={true}
-                        leftIcon={<FontAwesomeIcon name='code' size={24} color='#FF783C'/>}
+                        leftIcon={<Icon name='code' size={24} color='#FF783C'/>}
                         rightIcon={
                             <Button
                                 titleStyle={{fontSize: 12}}
@@ -81,7 +83,7 @@ export default class RegisterIndex extends Component {
                         ref='password'
                         shake={true}
                         placeholder='请输入密码'
-                        leftIcon={<FontAwesomeIcon name='lock' size={24} color='#FF783C'/>}
+                        leftIcon={<Icon name='lock' size={24} color='#FF783C'/>}
                         secureTextEntry={true}
                         leftIconContainerStyle={{marginRight: 20}}
                         errorMessage={'密码由字母、符号和数字组成'}
@@ -96,7 +98,7 @@ export default class RegisterIndex extends Component {
                         ref='password_confirmation'
                         shake={true}
                         placeholder='请输重复密码'
-                        leftIcon={<FontAwesomeIcon name='lock' size={24} color='#FF783C'/>}
+                        leftIcon={<Icon name='lock' size={24} color='#FF783C'/>}
                         secureTextEntry={true}
                         leftIconContainerStyle={{marginRight: 20}}
                         errorMessage={'两次输入的密码必须一致'}
@@ -125,21 +127,21 @@ export default class RegisterIndex extends Component {
 
         // this.countTime(60);
 
-        HttpsUtils.post_no(Tools.USER_PATH('/api/register/get_verify_code'), {'account': this.state.username})
-            .then(response => {
-                if (response.status===200) {
-                    this.refs.toast.show('验证码发送成功，请注意接收!', 500)
-                    this.countTime(60);
-                }else {
-                    alert(JSON.stringify(response))
-                }
-            })
-            .then(result => {
-                this.refs.toast.show(result.message, 500)
-            })
-            .catch(error => {
-                this.refs.toast.show('获取验证码失败', 500)
-            })
+        // HttpsUtils.post_no(Tools.USER_PATH('/api/register/get_verify_code'), {'account': this.state.username})
+        //     .then(response => {
+        //         if (response.status===200) {
+        //             this.refs.toast.show('验证码发送成功，请注意接收!', 500)
+        //             this.countTime(60);
+        //         }else {
+        //             alert(JSON.stringify(response))
+        //         }
+        //     })
+        //     .then(result => {
+        //         this.refs.toast.show(result.message, 500)
+        //     })
+        //     .catch(error => {
+        //         this.refs.toast.show('获取验证码失败', 500)
+        //     })
     }
 
     countTime(num) {
@@ -175,39 +177,39 @@ export default class RegisterIndex extends Component {
             'verify_code': this.state.verify_code,
         }
 
-        HttpsUtils.post(Tools.USER_PATH('/api/register'), data)
-            .then(result => {
-                if (result.message) {
-                    this.refs.toast.show(result.message, 500)
-                    return;
-                } else {
-                    DeviceStorage.save('login_back', result)
-                    this._get_UserInfo({'ticket': result.ticket});
-                }
-
-            })
-            .catch(error => {
-                this.refs.toast.show(error, 500)
-            })
+    //     HttpsUtils.post(Tools.USER_PATH('/api/register'), data)
+    //         .then(result => {
+    //             if (result.message) {
+    //                 this.refs.toast.show(result.message, 500)
+    //                 return;
+    //             } else {
+    //                 DeviceStorage.save('login_back', result)
+    //                 this._get_UserInfo({'ticket': result.ticket});
+    //             }
+    //
+    //         })
+    //         .catch(error => {
+    //             this.refs.toast.show(error, 500)
+    //         })
     }
 
     _get_UserInfo(data) {
-        HttpsUtils.post(Tools.GET_PATH('/api/auth/login'), data)
-            .then(result => {
-                if (result.message) {
-                    alert(result.message)
-                    return;
-                }
-
-                DeviceStorage.save('user_info', result)
-                this.refs.toast.show('成功，正在录入信息...', 500, () => {
-                    this.props.navigation.navigate('App')
-                })
-
-            })
-            .catch(error => {
-                this.refs.toast.show(error, 500);
-            })
+        // HttpsUtils.post(Tools.GET_PATH('/api/auth/login'), data)
+        //     .then(result => {
+        //         if (result.message) {
+        //             alert(result.message)
+        //             return;
+        //         }
+        //
+        //         DeviceStorage.save('user_info', result)
+        //         this.refs.toast.show('成功，正在录入信息...', 500, () => {
+        //             this.props.navigation.navigate('App')
+        //         })
+        //
+        //     })
+        //     .catch(error => {
+        //         this.refs.toast.show(error, 500);
+        //     })
     }
 
     componentWillUnmount() {
