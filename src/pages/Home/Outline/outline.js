@@ -7,6 +7,7 @@ import {AppRegistry,
     Alert,
     TouchableOpacity} from "react-native";
 import Icon from '../../../iconfont';
+import {ActionSheet} from "react-native-ui-lib";
 
 export default class OutLine extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ export default class OutLine extends Component {
 
         this.state = {
             value: 42,
-            cellDataArray:[]
+            cellDataArray:[],
+            showNative:false,
 
         };
 
@@ -49,10 +51,22 @@ export default class OutLine extends Component {
     }
 
     componentDidMount() {
+
+        this.props.navigation.setOptions({
+            headerRight:()=>(
+                <Icon name='tianjia1' size={24} color={'#606366'} style={{marginRight:20}} onPress={this._goRelease.bind(this)}/>
+            )
+        });
+
+
         let newArray = JSON.parse(JSON.stringify(this.cellDatas));
         this.setState({
             cellDataArray:newArray
         });
+    }
+
+    _goRelease(){
+        this.props.navigation.navigate("releasesection")
     }
 
     handlerSectionHeader=(info)=>{//Alert.alert('sss', 'd');
@@ -100,10 +114,12 @@ export default class OutLine extends Component {
             return(<View></View>);
         }else{
             return (
-                <View style={{height:40,backgroundColor:'white',justifyContent:'center'}}>
-                    <Text style={{color:'red'}}>
-                        {info.item.title}
-                    </Text>
+                <View style={{marginLeft:40,marginRight:20,minHeight:40,justifyContent:'center',borderBottomColor:'#EDF0F2',borderBottomWidth:1}}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('login')}>
+                        <Text style={{color:'#303133',fontSize:14}}>
+                            {info.item.title}
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             );
         }
@@ -111,18 +127,34 @@ export default class OutLine extends Component {
 
     _renderSectionHeader=(item)=>{
         return  (
-            <TouchableOpacity style={{backgroundColor:'white',height:60,justifyContent:'center',margin:5}} onPress={this.handlerSectionHeader.bind(this, item)}>
+            <View style={{flex:1,flexDirection:'row',height:60,alignItems:'center',margin:5,backgroundColor:'#FFFFFF'}}>
+                <TouchableOpacity activeOpacity={1} style={{flex:1,flexDirection:'column'}} onPress={this.handlerSectionHeader.bind(this, item)}>
                     <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
-                        <Icon name="paichu" size={14} color={'#303133'} style={{marginLeft:10,marginRight:10}}/>
-                        <Text style={{fontSize:15,color:'#303133'}}>{item.section.title}</Text>
+                        <Icon name="paichu" size={14} color={'#909499'} style={{marginLeft:10,marginRight:10}}/>
+                        <Text style={{fontSize:15,color:'#303133',fontWeight:'bold'}}>{item.section.title}</Text>
                     </View>
                     <View style={{flex:1,flexDirection:'row',justifyContent:'space-around',alignItems:'center'}}>
-                        <Text>视频课：{item.section.video}</Text>
-                        <Text>测试：{item.section.test}</Text>
-                        <Text>作业：{item.section.task}</Text>
-                        <Text>资料：{item.section.ziliao}</Text>
+                        <Text style={styles.headerText}>视频课：{item.section.video}</Text>
+                        <Text style={styles.headerText}>测试：{item.section.test}</Text>
+                        <Text style={styles.headerText}>作业：{item.section.task}</Text>
+                        <Text style={styles.headerText}>资料：{item.section.ziliao}</Text>
                     </View>
-            </TouchableOpacity>);
+                </TouchableOpacity>
+                <Icon name={'icon-test1'} size={25} color={'#C0C6CC'} style={{marginRight:10}} onPress={()=>{this.setState({showNative:!this.state.showNative})}}/>
+            </View>
+        );
+    }
+
+    pickOption(num){
+        switch (num) {
+            case 1:
+                this.props.navigation.navigate('releasesection')
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
 
     render(){
@@ -141,6 +173,34 @@ export default class OutLine extends Component {
                     keyExtractor={(item, index) => item + index}
                     // sections={this.cellDatas}
                 />
+                <ActionSheet
+                    // title="Title"
+                    // message="Message of action sheet"
+                    cancelButtonIndex={3}
+                    destructiveButtonIndex={3}
+                    options={[
+                        {
+                            label: '编辑章节',
+                            onPress: () => this.pickOption(1),
+                        },
+                        {
+                            label: '添加课时',
+                            onPress: () => this.pickOption(2),
+                        },
+                        {
+                            label: '删除章节',
+                            onPress: () => this.pickOption(3),
+                        },
+
+                        {
+                            label: '取消',
+                            onPress: () => this.pickOption(0),
+                        },
+                    ]}
+                    visible={this.state.showNative}
+                    useNativeIOS
+                    onDismiss={() => this.setState({showNative: false})}
+                />
             </View>
         );
     }
@@ -149,5 +209,10 @@ export default class OutLine extends Component {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-    }
+        backgroundColor:'white',
+    },
+    headerText:{
+        fontSize:12,
+        color:'#909499'
+    },
 });
