@@ -82,7 +82,7 @@ export default function App() {
                     dispatch({type: 'SIGN_IN', token: token});
                 } catch (e) {
                     /* handle error */
-                    console.log(e)
+                    console.log("error is "+e)
                 }
             },
             signOut: () => dispatch({type: 'SIGN_OUT'}),

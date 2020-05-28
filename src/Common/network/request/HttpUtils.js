@@ -128,11 +128,11 @@ export default class HttpUtils extends Component {
      */
     static postRequrst =async (url, params = {}) => {
         // RootHUD.show();
-            let _h = await this.setHeader()
+            //let _h = await this.setHeader()
         return timeoutFetch(
             fetch(url, {
                 method: 'POST',
-                headers: _h,
+                headers: header,
                 body: JSON.stringify(params),
             }),
         )
@@ -144,6 +144,11 @@ export default class HttpUtils extends Component {
                         '服务器繁忙，请稍后再试；\r\nCode:' + response.status,
                     );
                 }
+            },err=>{
+                Toast.show(
+                        "网络请求出错,请检查网络配置后再试",
+                    );
+                return
             })
             .then(response => {
                 // RootHUD.hidden();

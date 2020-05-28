@@ -79,6 +79,8 @@ target 'IbodaoRn' do
 
 
 
+  pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
+
   target 'IbodaoRnTests' do
     inherit! :complete
     # Pods for testing
